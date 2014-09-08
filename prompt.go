@@ -17,9 +17,8 @@ func StringRequired(prompt string) string {
 	s := String(prompt)
 	if strings.Trim(s, " ") == "" {
 		return StringRequired(prompt)
-	} else {
-		return s
 	}
+	return s
 }
 
 // Confirm continues prompting until the input is boolean-ish.
