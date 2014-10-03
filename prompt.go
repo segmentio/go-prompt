@@ -3,6 +3,7 @@ package prompt
 import "strings"
 import "strconv"
 import "fmt"
+import "github.com/howeyc/gopass"
 
 // String prompt.
 func String(prompt string) string {
@@ -67,6 +68,18 @@ func Choose(prompt string, list []string) int {
 	}
 
 	return i
+}
+
+func Password(prompt string) string {
+	fmt.Printf(prompt + ": ")
+	s := string(gopass.GetPasswd()[0:])
+	return s
+}
+
+func PasswordMasked(prompt string) string {
+	fmt.Printf(prompt + ": ")
+	s := string(gopass.GetPasswdMasked()[0:])
+	return s
 }
 
 // index of `s` in `list`.
