@@ -70,12 +70,14 @@ func Choose(prompt string, list []string) int {
 	return i
 }
 
+// Password prompt.
 func Password(prompt string) string {
 	fmt.Printf(prompt + ": ")
 	s := string(gopass.GetPasswd()[0:])
 	return s
 }
 
+// Password prompt with mask.
 func PasswordMasked(prompt string) string {
 	fmt.Printf(prompt + ": ")
 	s := string(gopass.GetPasswdMasked()[0:])
