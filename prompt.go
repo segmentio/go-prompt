@@ -25,7 +25,7 @@ func StringRequired(prompt string) string {
 
 // Confirm continues prompting until the input is boolean-ish.
 func Confirm(prompt string) bool {
-	s := String(prompt + "?")
+	s := String(prompt)
 	switch s {
 	case "yes", "y", "Y":
 		return true
