@@ -1,21 +1,21 @@
 package prompt
 
+import "github.com/howeyc/gopass"
 import "strings"
 import "strconv"
 import "fmt"
-import "github.com/howeyc/gopass"
 
 // String prompt.
-func String(prompt string) string {
+func String(prompt string, args ...interface{}) string {
 	var s string
-	fmt.Printf(prompt + ": ")
+	fmt.Printf(prompt+": ", args...)
 	fmt.Scanln(&s)
 	return s
 }
 
 // String prompt (required).
-func StringRequired(prompt string) string {
-	s := String(prompt)
+func StringRequired(prompt string, args ...interface{}) string {
+	s := String(prompt, args...)
 	if strings.Trim(s, " ") == "" {
 		return StringRequired(prompt)
 	} else {
@@ -24,15 +24,15 @@ func StringRequired(prompt string) string {
 }
 
 // Confirm continues prompting until the input is boolean-ish.
-func Confirm(prompt string) bool {
-	s := String(prompt)
+func Confirm(prompt string, args ...interface{}) bool {
+	s := String(prompt, args...)
 	switch s {
 	case "yes", "y", "Y":
 		return true
 	case "no", "n", "N":
 		return false
 	default:
-		return Confirm(prompt)
+		return Confirm(prompt, args...)
 	}
 }
 
