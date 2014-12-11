@@ -4,12 +4,13 @@ import ".."
 
 func main() {
 	{
-		pass := prompt.Password("something")
+		name := "Tobi"
+		pass := prompt.Password("hi %s enter your password", name)
 		println(pass)
 	}
 
 	{
-		pass := prompt.PasswordMasked("something")
+		pass := prompt.PasswordMasked("masked passwords are cool")
 		println(pass)
 	}
 }

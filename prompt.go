@@ -71,15 +71,15 @@ func Choose(prompt string, list []string) int {
 }
 
 // Password prompt.
-func Password(prompt string) string {
-	fmt.Printf(prompt + ": ")
+func Password(prompt string, args ...interface{}) string {
+	fmt.Printf(prompt+": ", args...)
 	s := string(gopass.GetPasswd()[0:])
 	return s
 }
 
 // Password prompt with mask.
-func PasswordMasked(prompt string) string {
-	fmt.Printf(prompt + ": ")
+func PasswordMasked(prompt string, args ...interface{}) string {
+	fmt.Printf(prompt+": ", args...)
 	s := string(gopass.GetPasswdMasked()[0:])
 	return s
 }
