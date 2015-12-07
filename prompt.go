@@ -4,12 +4,15 @@ import "github.com/howeyc/gopass"
 import "strings"
 import "strconv"
 import "fmt"
+import "bufio"
+import "os"
 
 // String prompt.
 func String(prompt string, args ...interface{}) string {
 	var s string
+	reader := bufio.NewReader(os.Stdin)
 	fmt.Printf(prompt+": ", args...)
-	fmt.Scanln(&s)
+	s, _ = reader.ReadString('\n')
 	return s
 }
 
