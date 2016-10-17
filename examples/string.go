@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
-import ".."
+import (
+	"fmt"
+
+	prompt "github.com/segmentio/go-prompt"
+)
 
 func main() {
 	println("need your name!")

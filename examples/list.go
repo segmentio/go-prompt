@@ -1,6 +1,6 @@
 package main
 
-import ".."
+import prompt "github.com/segmentio/go-prompt"
 
 var langs = []string{
 	"c",
