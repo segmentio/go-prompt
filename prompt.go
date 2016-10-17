@@ -14,25 +14,22 @@ func String(prompt string, args ...interface{}) string {
 }
 
 // String prompt (required).
-func StringRequired(prompt string, args ...interface{}) string {
-	s := String(prompt, args...)
-	if strings.Trim(s, " ") == "" {
-		return StringRequired(prompt)
-	} else {
-		return s
+func StringRequired(prompt string, args ...interface{}) (s string) {
+	for strings.Trim(s, " ") == "" {
+		s = String(prompt, args...)
 	}
+	return s
 }
 
 // Confirm continues prompting until the input is boolean-ish.
 func Confirm(prompt string, args ...interface{}) bool {
-	s := String(prompt, args...)
-	switch s {
-	case "yes", "y", "Y":
-		return true
-	case "no", "n", "N":
-		return false
-	default:
-		return Confirm(prompt, args...)
+	for {
+		switch String(prompt, args...) {
+		case "Yes", "yes", "y", "Y":
+			return true
+		case "No", "no", "n", "N":
+			return false
+		}
 	}
 }
 
