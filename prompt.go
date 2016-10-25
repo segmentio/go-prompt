@@ -1,16 +1,22 @@
 package prompt
 
-import "github.com/howeyc/gopass"
+import (
+	"os"
+
+	"github.com/howeyc/gopass"
+)
+
 import "strings"
 import "strconv"
 import "fmt"
+import "bufio"
 
 // String prompt.
 func String(prompt string, args ...interface{}) string {
-	var s string
 	fmt.Printf(prompt+": ", args...)
-	fmt.Scanln(&s)
-	return s
+	reader := bufio.NewReader(os.Stdin)
+	bytes, _, _ := reader.ReadLine()
+	return string(bytes)
 }
 
 // String prompt (required).
