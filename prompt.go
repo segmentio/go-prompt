@@ -1,9 +1,13 @@
 package prompt
 
-import "github.com/howeyc/gopass"
-import "strings"
-import "strconv"
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"strconv"
+	"strings"
+
+	"github.com/howeyc/gopass"
+)
 
 // String prompt.
 func String(prompt string, args ...interface{}) string {
@@ -19,6 +23,40 @@ func StringRequired(prompt string, args ...interface{}) (s string) {
 		s = String(prompt, args...)
 	}
 	return s
+}
+
+// String default (required).
+func StringDefault(prompt string, dvalue string) (s string) {
+	fmt.Println()
+	fmt.Printf("%s (default value: %s)", prompt, dvalue)
+	fmt.Scanln(&s)
+	if strings.Trim(s, " ") == "" {
+		return dvalue
+	}
+	return s
+}
+
+// Stringln reads multi spaced sentence until newline
+func Stringln(scanner *bufio.Scanner, prompt string) string {
+	fmt.Printf(prompt + ": ")
+	scanner.Scan()
+	return scanner.Text()
+}
+
+// Integer prompt (required).
+func IntegerRequired(prompt string, args ...interface{}) (in int) {
+	fmt.Println()
+	in = 0
+	for {
+		s := String(prompt)
+		n, err := strconv.Atoi(s)
+		if err != nil {
+			continue
+		}
+		in = n
+		break
+	}
+	return
 }
 
 // Confirm continues prompting until the input is boolean-ish.
@@ -62,6 +100,37 @@ func Choose(prompt string, list []string) int {
 		if i != -1 {
 			break
 		}
+	}
+
+	return i
+}
+
+// Choose prompts for a single selection from `list`, returning in the index.
+func ChooseInterface(prompt string, list []interface{}) int {
+	fmt.Println()
+	for i, val := range list {
+		fmt.Printf("  %d) %+v\n", i+1, val)
+	}
+
+	fmt.Println()
+	i := -1
+
+	for {
+		s := String(prompt)
+
+		// index
+		n, err := strconv.Atoi(s)
+		if err != nil {
+			continue
+		}
+
+		if n > 0 && n <= len(list) {
+			i = n - 1
+			break
+		} else {
+			continue
+		}
+
 	}
 
 	return i
