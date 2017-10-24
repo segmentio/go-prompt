@@ -1,4 +1,6 @@
 
+forked from segmentio/go-prompt
+
 # go-prompt
 
  Terminal prompts for Go.
@@ -7,6 +9,7 @@
 
 ## Example
 
+1.
 ```go
 package main
 
@@ -28,6 +31,24 @@ func main() {
 }
 ```
 
-## License
+2.
+```
+package main
 
- MIT
+import (
+	"fmt"
+	"os"
+
+	"bufio"
+
+	prompt "github.com/segmentio/go-prompt"
+)
+
+func main() {
+	println("Getting Started!")
+	scanner := bufio.NewScanner(os.Stdin)
+	longLine := prompt.Stringln(scanner, "Enter a long senctence")
+	singleWord := prompt.String("Single Word")
+	fmt.Printf("\nHello \n long: %s \n short: %s\n", longLine, singleWord)
+}
+```
