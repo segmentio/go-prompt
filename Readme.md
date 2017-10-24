@@ -32,7 +32,7 @@ func main() {
 ```
 
 2.
-```
+```go
 package main
 
 import (
