@@ -44,19 +44,20 @@ func Stringln(scanner *bufio.Scanner, prompt string) string {
 }
 
 // Integer prompt (required).
-func IntegerRequired(prompt string, args ...interface{}) (in int) {
-	fmt.Println()
-	in = 0
+func IntegerRequired(prompt string, args ...interface{}) int {
 	for {
-		s := String(prompt)
-		n, err := strconv.Atoi(s)
-		if err != nil {
-			continue
+		n := Integer(prompt, args...)
+		if n != 0 {
+			return n
 		}
-		in = n
-		break
 	}
-	return
+}
+
+// Integer prompt
+func Integer(prompt string, args ...interface{}) int {
+	s := String(prompt, args...)
+	n, _ := strconv.Atoi(s)
+	return n
 }
 
 // Confirm continues prompting until the input is boolean-ish.
