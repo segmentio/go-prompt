@@ -1,6 +1,6 @@
 package main
 
-import prompt "github.com/segmentio/go-prompt"
+import "github.com/riteshpradhan/go-prompt"
 
 func main() {
 	if ok := prompt.Confirm("launch %s?", "something"); ok {

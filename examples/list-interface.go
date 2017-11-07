@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	prompt "github.com/segmentio/go-prompt"
+	"github.com/riteshpradhan/go-prompt"
 )
 
 // MyFriend is custom type

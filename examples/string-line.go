@@ -6,7 +6,7 @@ import (
 
 	"bufio"
 
-	prompt "github.com/segmentio/go-prompt"
+	"github.com/riteshpradhan/go-prompt"
 )
 
 func main() {
