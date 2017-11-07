@@ -10,25 +10,24 @@ import (
 )
 
 // String prompt.
-func String(prompt string, args ...interface{}) string {
+func String(msg string, args ...interface{}) string {
 	var s string
-	fmt.Printf(prompt+": ", args...)
+	prompt(msg, args...)
 	fmt.Scanln(&s)
 	return s
 }
 
 // String prompt (required).
-func StringRequired(prompt string, args ...interface{}) (s string) {
+func StringRequired(msg string, args ...interface{}) (s string) {
 	for strings.Trim(s, " ") == "" {
-		s = String(prompt, args...)
+		s = String(msg, args...)
 	}
 	return s
 }
 
 // String default (required).
-func StringDefault(prompt string, dvalue string) (s string) {
-	fmt.Println()
-	fmt.Printf("%s (default value: %s)", prompt, dvalue)
+func StringDefault(msg string, dvalue string) (s string) {
+	fmt.Printf("%s (default value: %s)", msg, dvalue)
 	fmt.Scanln(&s)
 	if strings.Trim(s, " ") == "" {
 		return dvalue
@@ -37,16 +36,16 @@ func StringDefault(prompt string, dvalue string) (s string) {
 }
 
 // Stringln reads multi spaced sentence until newline
-func Stringln(scanner *bufio.Scanner, prompt string) string {
-	fmt.Printf(prompt + ": ")
+func Stringln(scanner *bufio.Scanner, msg string) string {
+	prompt(msg)
 	scanner.Scan()
 	return scanner.Text()
 }
 
 // Integer prompt (required).
-func IntegerRequired(prompt string, args ...interface{}) int {
+func IntegerRequired(msg string, args ...interface{}) int {
 	for {
-		n := Integer(prompt, args...)
+		n := Integer(msg, args...)
 		if n != 0 {
 			return n
 		}
@@ -54,16 +53,16 @@ func IntegerRequired(prompt string, args ...interface{}) int {
 }
 
 // Integer prompt
-func Integer(prompt string, args ...interface{}) int {
-	s := String(prompt, args...)
+func Integer(msg string, args ...interface{}) int {
+	s := String(msg, args...)
 	n, _ := strconv.Atoi(s)
 	return n
 }
 
 // Confirm continues prompting until the input is boolean-ish.
-func Confirm(prompt string, args ...interface{}) bool {
+func Confirm(msg string, args ...interface{}) bool {
 	for {
-		switch String(prompt, args...) {
+		switch String(msg, args...) {
 		case "Yes", "yes", "y", "Y":
 			return true
 		case "No", "no", "n", "N":
@@ -73,7 +72,7 @@ func Confirm(prompt string, args ...interface{}) bool {
 }
 
 // Choose prompts for a single selection from `list`, returning in the index.
-func Choose(prompt string, list []string) int {
+func Choose(msg string, list []string) int {
 	fmt.Println()
 	for i, val := range list {
 		fmt.Printf("  %d) %s\n", i+1, val)
@@ -83,7 +82,7 @@ func Choose(prompt string, list []string) int {
 	i := -1
 
 	for {
-		s := String(prompt)
+		s := String(msg)
 
 		// index
 		n, err := strconv.Atoi(s)
@@ -107,7 +106,7 @@ func Choose(prompt string, list []string) int {
 }
 
 // Choose prompts for a single selection from `list`, returning in the index.
-func ChooseInterface(prompt string, list []interface{}) int {
+func ChooseInterface(msg string, list []interface{}) int {
 	fmt.Println()
 	for i, val := range list {
 		fmt.Printf("  %d) %+v\n", i+1, val)
@@ -117,7 +116,7 @@ func ChooseInterface(prompt string, list []interface{}) int {
 	i := -1
 
 	for {
-		s := String(prompt)
+		s := String(msg)
 
 		// index
 		n, err := strconv.Atoi(s)
@@ -138,16 +137,16 @@ func ChooseInterface(prompt string, list []interface{}) int {
 }
 
 // Password prompt.
-func Password(prompt string, args ...interface{}) string {
-	fmt.Printf(prompt+": ", args...)
+func Password(msg string, args ...interface{}) string {
+	prompt(msg, args...)
 	password, _ := gopass.GetPasswd()
 	s := string(password[0:])
 	return s
 }
 
 // Password prompt with mask.
-func PasswordMasked(prompt string, args ...interface{}) string {
-	fmt.Printf(prompt+": ", args...)
+func PasswordMasked(msg string, args ...interface{}) string {
+	prompt(msg, args...)
 	password, _ := gopass.GetPasswdMasked()
 	s := string(password[0:])
 	return s
@@ -161,4 +160,8 @@ func indexOf(s string, list []string) int {
 		}
 	}
 	return -1
+}
+
+func prompt(msg string, args ...interface{}) {
+	fmt.Printf(msg+": ", args...)
 }
