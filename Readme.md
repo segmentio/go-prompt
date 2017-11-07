@@ -7,13 +7,12 @@ forked from segmentio/go-prompt
 
  View the [docs](http://godoc.org/pkg/github.com/segmentio/go-prompt).
 
-## Example
+## How to use:
 
-1.
 ```go
 package main
 
-import "github.com/segmentio/go-prompt"
+import "github.com/riteshpradhan/go-prompt"
 
 var langs = []string{
   "c",
@@ -31,24 +30,15 @@ func main() {
 }
 ```
 
-2.
-```go
-package main
-
-import (
-	"fmt"
-	"os"
-
-	"bufio"
-
-	prompt "github.com/segmentio/go-prompt"
-)
-
-func main() {
-	println("Getting Started!")
-	scanner := bufio.NewScanner(os.Stdin)
-	longLine := prompt.Stringln(scanner, "Enter a long senctence")
-	singleWord := prompt.String("Single Word")
-	fmt.Printf("\nHello \n long: %s \n short: %s\n", longLine, singleWord)
-}
-```
+## Functions:
+* String
+* StringRequired
+* StringDefault
+* Stringln
+* Integer
+* IntegerRequired
+* Confirm
+* Choose
+* ChooseInterface
+* Password
+* PasswordMasked
