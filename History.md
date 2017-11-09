@@ -1,3 +1,11 @@
+v2.0.0 / 2017-09-22
+===================
+
+  * add Stringln for multi spaced sentence
+  * add ChooseInterface for list of variable types
+  * examples added
+
+
 
 v1.2.0 / 2014-12-10
 ===================

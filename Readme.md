@@ -1,16 +1,18 @@
 
+forked from segmentio/go-prompt
+
 # go-prompt
 
  Terminal prompts for Go.
 
  View the [docs](http://godoc.org/pkg/github.com/segmentio/go-prompt).
 
-## Example
+## How to use:
 
 ```go
 package main
 
-import "github.com/segmentio/go-prompt"
+import "github.com/riteshpradhan/go-prompt"
 
 var langs = []string{
   "c",
@@ -28,6 +30,15 @@ func main() {
 }
 ```
 
-## License
-
- MIT
+## Functions:
+* String
+* StringRequired
+* StringDefault
+* Stringln
+* Integer
+* IntegerRequired
+* Confirm
+* Choose
+* ChooseInterface
+* Password
+* PasswordMasked
