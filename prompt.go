@@ -1,15 +1,24 @@
 package prompt
 
-import "github.com/howeyc/gopass"
-import "strings"
-import "strconv"
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+
+	"github.com/howeyc/gopass"
+)
 
 // String prompt.
 func String(prompt string, args ...interface{}) string {
 	var s string
 	fmt.Printf(prompt+": ", args...)
-	fmt.Scanln(&s)
+	//get input from keyboard
+	scanner := bufio.NewScanner(os.Stdin)
+	if scanner.Scan() {
+		s = scanner.Text()
+	}
 	return s
 }
 
